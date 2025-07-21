@@ -1,0 +1,55 @@
+{
+  "options" : [ {
+    "name" : "size",
+    "type" : "long"
+  }, {
+    "name" : "searchAfter",
+    "type" : "array"
+  }, {
+    "name" : "sort",
+    "type" : "sort"
+  } ],
+  "queryModel" : {
+    "key" : "cLACQ008IntakeProcessInstances",
+    "id" : "QUERY_MODEL-d6a87890-29e5-11f0-bf3f-0a580a261150"
+  },
+  "type" : "table",
+  "configuration" : {
+    "pageSize" : 25,
+    "columns" : [ {
+      "key" : "nameKeyword",
+      "defaultLabel" : "Name",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "businessKey",
+      "defaultLabel" : "Business key",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "startTime",
+      "defaultLabel" : "Started",
+      "type" : "dateTime",
+      "visible" : true,
+      "sortable" : true
+    } ],
+    "options" : [ {
+      "name" : "size",
+      "type" : "long"
+    }, {
+      "name" : "searchAfter",
+      "type" : "array"
+    }, {
+      "name" : "sort",
+      "type" : "sort"
+    } ],
+    "title" : "Intake Process Instances"
+  },
+  "queryResultMapping" : {
+    "aggregationDefinitions" : [ ]
+  },
+  "name" : "CLAC-DC-004 Intake Process Instances",
+  "key" : "cLACDC004IntakeProcessInstances"
+}

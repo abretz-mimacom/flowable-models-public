@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.flowable</groupId>
+  <artifactId>flowapps</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <ci.repo.url>${env.CI_API_V4_URL}/projects/${ci.project.id}/packages/maven</ci.repo.url>
+    <ci.project.id>${env.CI_PROJECT_ID}</ci.project.id>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>ci.repo.url</url>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>${ci.repo.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>gitlab-maven</id>
+      <url>${ci.repo.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>

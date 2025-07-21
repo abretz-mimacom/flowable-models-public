@@ -1,0 +1,12 @@
+{
+  "config" : {
+    "scriptInfo" : {
+      "script" : "import com.flowable.core.common.api.security.SecurityScope;\nimport com.flowable.core.spring.security.SecurityUtils;\nimport com.flowable.idm.engine.impl.util.UserUtil;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\nObjectMapper objectMapper = new ObjectMapper();\n\n// Get userid and groups to add to the query\nSecurityScope securityScope = SecurityUtils.getCurrentUserSecurityScope();\nString userId = securityScope.getUserId(); // saves us passing in the userid\n\n// Get the user's manager ID from userInfo\n// Sample format of manager string\n// CN=White\\, Kevin (PLQ6047),OU=USERS,OU=IT,OU=COSAs,DC=eagle,DC=usaa,DC=com\n\ndef platformUser = platformIdentityService.createPlatformUserQuery()\n                      .userId(userId)\n//                      .includeIdentityInfo()\n                      .singleResult();\n\nString platformUserStr = objectMapper.writeValueAsString(platformUser);\nflw.setOutput(\"platformUser\", flw.json.stringToJson(platformUserStr));\nflw.setOutput(\"dn\", platformUser.getDistinguishedName());\n\n// this only here because I dont have any reports\n//String mgrDN = UserUtil.findUserInfo(\"manager\", platformUser);\n\ndef workers = platformIdentityService.createPlatformUserQuery()\n                      .includeIdentityInfo()\n                      .infoValueLikeIgnoreCase(\"manager\", platformUser.getDistinguishedName())\n                      .list()\n\n// Create output array\ndef workerArray = flw.json.createArray();\n// Add unassigned as first element\ndef firstWorker = flw.json.createObject();\nfirstWorker.putString(\"workerId\", \"unassigned\");\nfirstWorker.putString(\"displayName\", \"Unassigned\");\nworkerArray.addObject(firstWorker);\n// Now iterate over returned list to build list of users\nfor(def worker : workers){\n  def thisWorker = flw.json.createObject();\n  thisWorker.putString(\"workerId\", worker.getId());\n  thisWorker.putString(\"displayName\", worker.getDisplayName());\n  workerArray.addObject(thisWorker);\n}\nflw.setOutput(\"myReports\", workerArray);\n\n",
+      "language" : "groovy"
+    }
+  },
+  "ignoreConfirmationMessage" : true,
+  "botKey" : "platform-script-evaluation-bot",
+  "name" : "CLAC-A-002 Request Manager Reports",
+  "key" : "cLACA002RequestManagerReports"
+}

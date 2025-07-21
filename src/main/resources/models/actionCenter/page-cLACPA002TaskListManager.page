@@ -1,0 +1,1273 @@
+{
+  "formModelEvents" : [ {
+    "id" : "SelectedPanel",
+    "eventType" : "beforeFormLoad",
+    "expression" : "{{\"assigned\"}}",
+    "resultVariable" : "selectedPanel"
+  } ],
+  "rows" : [ {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-html-component" ],
+        "stencilId" : "cloud-html-component"
+      },
+      "labelAlign" : "top",
+      "value" : "<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\"><span style=\"color: rgb(52, 73, 94);\"><strong>Manager View<br></strong><br></span></span></p>",
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show",
+        "showBorder" : false,
+        "params" : { }
+      },
+      "size" : 12,
+      "id" : "html-component1",
+      "type" : "htmlComponent"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-text" ],
+        "stencilId" : "cloud-text"
+      },
+      "labelAlign" : "top",
+      "value" : "{{username}}",
+      "defaultValue" : "{{$currentUser.displayName}}",
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : false,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 6,
+      "tabIndex" : 0,
+      "label" : "Employee Name",
+      "id" : "text1",
+      "type" : "text"
+    }, {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-text" ],
+        "stencilId" : "cloud-text"
+      },
+      "labelAlign" : "top",
+      "value" : "{{employeeID}}",
+      "defaultValue" : "{{$currentUser.id.substring(0, $currentUser.id.indexOf(\"@\"))}}",
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : false,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 6,
+      "tabIndex" : 0,
+      "label" : "Employee ID",
+      "id" : "text2",
+      "type" : "text"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-hline" ],
+        "stencilId" : "cloud-hline"
+      },
+      "labelAlign" : "top",
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 12,
+      "id" : "hline1",
+      "type" : "hline"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-sub-panel" ],
+        "stencilId" : "cloud-sub-panel"
+      },
+      "label" : "Search And Filter",
+      "labelAlign" : "top",
+      "value" : "{{searchPanel}}",
+      "ignore" : false,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show",
+        "collapsible" : true,
+        "collapsed" : true,
+        "showBorder" : true,
+        "saveButtonVisible" : true,
+        "saveButtonEnabled" : true,
+        "cancelButtonVisible" : true,
+        "cancelButtonEnabled" : true,
+        "hideCancelCrossButton" : false,
+        "layoutDefinition" : {
+          "rows" : [ {
+            "cols" : [ {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-text" ],
+                "stencilId" : "cloud-text"
+              },
+              "labelAlign" : "top",
+              "value" : "{{memberId}}",
+              "ignore" : false,
+              "visible" : true,
+              "enabled" : true,
+              "isRequired" : false,
+              "extraSettings" : {
+                "validationPanelDisplay" : "show"
+              },
+              "size" : 3,
+              "tabIndex" : 0,
+              "label" : "Member ID",
+              "id" : "text3",
+              "type" : "text"
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-text" ],
+                "stencilId" : "cloud-text"
+              },
+              "labelAlign" : "top",
+              "value" : "{{applicationId}}",
+              "ignore" : false,
+              "visible" : true,
+              "enabled" : true,
+              "isRequired" : false,
+              "extraSettings" : {
+                "validationPanelDisplay" : "show"
+              },
+              "size" : 3,
+              "tabIndex" : 0,
+              "label" : "Application Number",
+              "id" : "text4",
+              "type" : "text"
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-date" ],
+                "stencilId" : "cloud-date"
+              },
+              "labelAlign" : "top",
+              "value" : "{{dueBefore}}",
+              "ignore" : false,
+              "visible" : true,
+              "enabled" : true,
+              "isRequired" : false,
+              "extraSettings" : {
+                "validationPanelDisplay" : "show",
+                "enableTime" : false,
+                "storeWithoutTime" : true,
+                "calendarStartDay" : "monday",
+                "disableWeekends" : false
+              },
+              "size" : 3,
+              "tabIndex" : 0,
+              "label" : "Due Before",
+              "id" : "date1",
+              "type" : "date"
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-single-select" ],
+                "stencilId" : "cloud-single-select"
+              },
+              "extraSettings" : {
+                "enableAutocomplete" : false,
+                "tagsEnabled" : false,
+                "preselectAll" : false,
+                "dataSource" : "Static",
+                "items" : [ {
+                  "text" : "1",
+                  "value" : "1"
+                }, {
+                  "text" : "2",
+                  "value" : "2"
+                }, {
+                  "text" : "3",
+                  "value" : "3"
+                }, {
+                  "text" : "4",
+                  "value" : "4"
+                }, {
+                  "text" : "5",
+                  "value" : "5"
+                } ],
+                "identity" : "value",
+                "storage" : "Id",
+                "linkTarget" : "_blank",
+                "validationPanelDisplay" : "show",
+                "multi" : false
+              },
+              "enabled" : true,
+              "labelAlign" : "top",
+              "value" : "{{priority}}",
+              "ignore" : false,
+              "visible" : true,
+              "isRequired" : false,
+              "size" : 3,
+              "tabIndex" : 0,
+              "label" : "Priority",
+              "id" : "single-select2",
+              "type" : "select"
+            } ]
+          }, {
+            "cols" : [ {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-text" ],
+                "stencilId" : "cloud-text"
+              },
+              "labelAlign" : "top",
+              "value" : "{{taskName}}",
+              "ignore" : false,
+              "visible" : true,
+              "enabled" : true,
+              "isRequired" : false,
+              "extraSettings" : {
+                "validationPanelDisplay" : "show"
+              },
+              "size" : 6,
+              "tabIndex" : 0,
+              "label" : "Task Name",
+              "id" : "text7",
+              "type" : "text"
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-single-select" ],
+                "stencilId" : "cloud-single-select"
+              },
+              "extraSettings" : {
+                "enableAutocomplete" : false,
+                "tagsEnabled" : false,
+                "preselectAll" : false,
+                "dataSource" : "Static",
+                "items" : [ {
+                  "text" : "APPLICATION_STARTED",
+                  "value" : "APPLICATION_STARTED"
+                }, {
+                  "text" : "APPLICATION_SUBMITTED",
+                  "value" : "APPLICATION_SUBMITTED"
+                }, {
+                  "text" : "RISK_ASSESSMENT_DECLINED",
+                  "value" : "RISK_ASSESSMENT_DECLINED"
+                }, {
+                  "text" : "RISK_ASSESSMENT_MANUAL_UNDERWRITING",
+                  "value" : "RISK_ASSESSMENT_MANUAL_UNDERWRITING"
+                }, {
+                  "text" : "RISK_ASSESSMENT_REQUEST_ADDITIONAL_INFORMATION",
+                  "value" : "RISK_ASSESSMENT_REQUEST_ADDITIONAL_INFORMATION"
+                }, {
+                  "text" : "RISK_ASSESSMENT_BATCH_RETRY",
+                  "value" : "RISK_ASSESSMENT_BATCH_RETRY"
+                }, {
+                  "text" : "RISK_ASSESSMENT_MANUAL_RBA",
+                  "value" : "RISK_ASSESSMENT_MANUAL_RBA"
+                }, {
+                  "text" : "RISK_ASSESSMENT_MANUAL_ERROR_RESOLVER",
+                  "value" : "RISK_ASSESSMENT_MANUAL_ERROR_RESOLVER"
+                }, {
+                  "text" : "RISK_ASSESSMENT_APPROVED",
+                  "value" : "RISK_ASSESSMENT_APPROVED"
+                }, {
+                  "text" : "RISK_ASSESSMENT_COUNTER_OFFER",
+                  "value" : "RISK_ASSESSMENT_COUNTER_OFFER"
+                }, {
+                  "text" : "RISK_ASSESMENT_REQUEST_ADDITIONAL_FUND",
+                  "value" : "RISK_ASSESMENT_REQUEST_ADDITIONAL_FUND"
+                }, {
+                  "text" : "RISK_ASSESSMENT_DISCONTINUED",
+                  "value" : "RISK_ASSESSMENT_DISCONTINUED"
+                }, {
+                  "text" : "LOAN_SETUP_STARTED",
+                  "value" : "LOAN_SETUP_STARTED"
+                }, {
+                  "text" : "COMMUNICATION_MSR_ROUTE_TO_ESIGN",
+                  "value" : "COMMUNICATION_MSR_ROUTE_TO_ESIGN"
+                }, {
+                  "text" : "COMMUNICATION_SIGN_STARTED",
+                  "value" : "COMMUNICATION_SIGN_STARTED"
+                }, {
+                  "text" : "COMMUNICATION_ESIGN_STARTED",
+                  "value" : "COMMUNICATION_ESIGN_STARTED"
+                }, {
+                  "text" : "COMMUNICATION_ESIGN_COMPLETED",
+                  "value" : "COMMUNICATION_ESIGN_COMPLETED"
+                }, {
+                  "text" : "FUNDING_COMPLETED",
+                  "value" : "FUNDING_COMPLETED"
+                }, {
+                  "text" : "BOOKING_BOOKED",
+                  "value" : "BOOKING_BOOKED"
+                }, {
+                  "text" : "UNDERWRITER_DISCONTINUE",
+                  "value" : "UNDERWRITER_DISCONTINUE"
+                }, {
+                  "text" : "CREDIT_RESCIND_DISCONTINUE",
+                  "value" : "CREDIT_RESCIND_DISCONTINUE"
+                }, {
+                  "text" : "DISCONTINUED_CREDIT_RESCIND",
+                  "value" : "DISCONTINUED_CREDIT_RESCIND"
+                }, {
+                  "text" : "LOAN_SETUP_RECLOSE",
+                  "value" : "LOAN_SETUP_RECLOSE"
+                }, {
+                  "text" : "FUNDING_READY_TO_BOOK",
+                  "value" : "FUNDING_READY_TO_BOOK"
+                }, {
+                  "text" : "APPLICATION_EXPIRED",
+                  "value" : "APPLICATION_EXPIRED"
+                }, {
+                  "text" : "FUNDER_DISCONTINUE",
+                  "value" : "FUNDER_DISCONTINUE"
+                }, {
+                  "text" : "ELIGIBILITY_DECLINED",
+                  "value" : "ELIGIBILITY_DECLINED"
+                }, {
+                  "text" : "ELIGIBILITY_DISCONTINUED",
+                  "value" : "ELIGIBILITY_DISCONTINUED"
+                } ],
+                "identity" : "value",
+                "storage" : "Id",
+                "linkTarget" : "_blank",
+                "validationPanelDisplay" : "show",
+                "multi" : false
+              },
+              "enabled" : true,
+              "labelAlign" : "top",
+              "value" : "{{status}}",
+              "ignore" : false,
+              "visible" : true,
+              "isRequired" : false,
+              "size" : 6,
+              "tabIndex" : 0,
+              "label" : "Loan Status",
+              "id" : "single-select3",
+              "type" : "select"
+            } ]
+          }, {
+            "cols" : [ {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-single-select" ],
+                "stencilId" : "cloud-single-select"
+              },
+              "extraSettings" : {
+                "enableAutocomplete" : true,
+                "autocompleteMinLength" : 0,
+                "tagsEnabled" : false,
+                "preselectAll" : false,
+                "dataSource" : "Static",
+                "items" : "{{$payload.$temp.assigneeList.data}}",
+                "identity" : "id",
+                "formatItem" : "{{$item.displayName}}",
+                "storage" : "Id",
+                "linkTarget" : "_blank",
+                "validationPanelDisplay" : "show",
+                "multi" : false
+              },
+              "enabled" : "{{$payload.selectedTab != 'unassigned'}}",
+              "labelAlign" : "top",
+              "value" : "{{selectedWorker}}",
+              "ignore" : false,
+              "visible" : "{{$payload.selectedTab != 'unassigned'}}",
+              "isRequired" : false,
+              "size" : 4,
+              "tabIndex" : 0,
+              "label" : "Assignee",
+              "id" : "single-select4",
+              "type" : "select"
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-script-button" ],
+                "stencilId" : "cloud-script-button"
+              },
+              "isRequired" : false,
+              "extraSettings" : {
+                "text" : "Clear Assignee",
+                "script" : "{{null}}",
+                "autoExecute" : "{{assignee == null}}",
+                "executeAlways" : false,
+                "alignment" : "left",
+                "iconAlignment" : "right",
+                "validationPanelDisplay" : "show"
+              },
+              "value" : "{{selectedWorker}}",
+              "visible" : true,
+              "ignore" : false,
+              "label" : "&nbsp;",
+              "primary" : false,
+              "labelAlign" : "top",
+              "enabled" : "{{$payload.selectedTab != 'unassigned'}}",
+              "size" : 2,
+              "tabIndex" : 0,
+              "id" : "script-button3",
+              "type" : "scriptButton"
+            }, {
+              "size" : 6,
+              "type" : ""
+            } ]
+          } ]
+        }
+      },
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "sub-panel1",
+      "type" : "panel"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-sub-panel" ],
+        "stencilId" : "cloud-sub-panel"
+      },
+      "label" : "Reassign To:",
+      "labelAlign" : "top",
+      "ignore" : false,
+      "visible" : "{{selectedTask.id != null && selectedPanel == 'open'}}",
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show",
+        "collapsible" : false,
+        "collapsed" : false,
+        "showBorder" : true,
+        "saveButtonVisible" : true,
+        "saveButtonEnabled" : true,
+        "cancelButtonVisible" : true,
+        "cancelButtonEnabled" : true,
+        "hideCancelCrossButton" : false,
+        "layoutDefinition" : {
+          "rows" : [ {
+            "cols" : [ {
+              "designInfo" : {
+                "stencilSuperIds" : [ "base-single-select" ],
+                "stencilId" : "cloud-single-select"
+              },
+              "extraSettings" : {
+                "enableAutocomplete" : true,
+                "autocompleteMinLength" : 0,
+                "tagsEnabled" : false,
+                "preselectAll" : false,
+                "dataSource" : "Static",
+                "items" : "{{$temp.assigneeList.data}}",
+                "formatItem" : "{{$item.displayName}}",
+                "storage" : "Full",
+                "linkTarget" : "_blank",
+                "validationPanelDisplay" : "show",
+                "multi" : false
+              },
+              "enabled" : "{{flw.count($temp.assigneeList.data) > 0}}",
+              "labelAlign" : "top",
+              "value" : "{{newWorker}}",
+              "ignore" : false,
+              "visible" : "{{flw.count($temp.assigneeList.data) > 0}}",
+              "isRequired" : false,
+              "size" : 5,
+              "tabIndex" : 0,
+              "id" : "single-select1",
+              "type" : "select"
+            }, {
+              "size" : 4,
+              "type" : ""
+            }, {
+              "designInfo" : {
+                "stencilSuperIds" : [ "Component" ],
+                "stencilId" : "work-action"
+              },
+              "extraSettings" : {
+                "text" : "Reassign Task",
+                "script" : "{{example + 1}}",
+                "autoExecute" : false,
+                "alignment" : "left",
+                "iconAlignment" : "right",
+                "validationPanelDisplay" : "show",
+                "actionDefinitionKey" : "cLACA002ReassignTask",
+                "sendFullPayload" : false,
+                "sendFullScope" : false,
+                "sendPayloadMapping" : [ {
+                  "name" : "newAssignee",
+                  "expression" : "{{newWorker.id}}"
+                }, {
+                  "name" : "taskId",
+                  "expression" : "{{selectedTask.id}}"
+                }, {
+                  "name" : "currentAssignee",
+                  "expression" : "{{selectedTask.assignee}}"
+                } ],
+                "mapFullResponse" : false,
+                "mapResponseInsideScope" : false,
+                "responsePayloadMapping" : [ {
+                  "name" : "$temp.refreshHelper",
+                  "expression" : "{{$response.id}}"
+                } ],
+                "sendScopeIdToGetDefinition" : true
+              },
+              "value" : ".",
+              "visible" : true,
+              "ignore" : false,
+              "primary" : false,
+              "labelAlign" : "top",
+              "enabled" : "{{selectedPanel != \"completed\" && flw.count($temp.assigneeList.data) > 0}}",
+              "size" : 3,
+              "id" : "work-action2",
+              "modelEvents" : [ {
+                "id" : "Tab Selection",
+                "eventType" : "onValueChange",
+                "expression" : "{{myExpression}}",
+                "resultVariable" : "selectedTab"
+              } ],
+              "type" : "workAction"
+            } ]
+          } ]
+        }
+      },
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "sub-panel2",
+      "type" : "panel"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-button-group" ],
+        "stencilId" : "cloud-button-group"
+      },
+      "labelAlign" : "top",
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show",
+        "asDropdown" : false,
+        "dropdownShowLabel" : false
+      },
+      "size" : 3,
+      "id" : "button-group1",
+      "alignment" : "left",
+      "type" : "buttonGroup",
+      "buttonDefinitions" : [ {
+        "designInfo" : {
+          "stencilSuperIds" : [ "base-script-button" ],
+          "stencilId" : "cloud-script-button"
+        },
+        "isRequired" : false,
+        "extraSettings" : {
+          "text" : "Open",
+          "script" : "open",
+          "autoExecute" : false,
+          "alignment" : "left",
+          "iconAlignment" : "right",
+          "validationPanelDisplay" : "show"
+        },
+        "value" : "{{selectedPanel}}",
+        "visible" : true,
+        "ignore" : false,
+        "primary" : false,
+        "labelAlign" : "top",
+        "enabled" : "{{selectedPanel != \"open\"}}",
+        "size" : 1,
+        "tabIndex" : 0,
+        "id" : "script-button4",
+        "type" : "scriptButton"
+      }, {
+        "designInfo" : {
+          "stencilSuperIds" : [ "base-script-button" ],
+          "stencilId" : "cloud-script-button"
+        },
+        "isRequired" : false,
+        "extraSettings" : {
+          "text" : "Completed",
+          "script" : "completed",
+          "autoExecute" : false,
+          "alignment" : "left",
+          "iconAlignment" : "right",
+          "validationPanelDisplay" : "show"
+        },
+        "value" : "{{selectedPanel}}",
+        "visible" : true,
+        "ignore" : false,
+        "primary" : false,
+        "labelAlign" : "top",
+        "enabled" : "{{selectedPanel != \"completed\"}}",
+        "size" : 1,
+        "tabIndex" : 0,
+        "id" : "script-button6",
+        "type" : "scriptButton"
+      }, {
+        "designInfo" : {
+          "stencilSuperIds" : [ "base-script-button" ],
+          "stencilId" : "cloud-script-button"
+        },
+        "isRequired" : false,
+        "value" : "{{selectedPanel}}",
+        "visible" : false,
+        "ignore" : false,
+        "extraSettings" : {
+          "script" : "{{\"open\"}}",
+          "autoExecute" : true,
+          "executeAlways" : false,
+          "alignment" : "left",
+          "iconAlignment" : "right",
+          "validationPanelDisplay" : "show"
+        },
+        "primary" : false,
+        "labelAlign" : "top",
+        "enabled" : true,
+        "size" : 1,
+        "tabIndex" : 0,
+        "id" : "script-button7",
+        "type" : "scriptButton"
+      } ]
+    }, {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-checkbox" ],
+        "stencilId" : "cloud-checkbox"
+      },
+      "checkboxLabelAlign" : "right",
+      "value" : "{{ignoreTaskAssignableTime}}",
+      "defaultValue" : false,
+      "ignore" : false,
+      "visible" : "{{(endpoints.ignoreAssignableVisible == \"true\")}}",
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 3,
+      "tabIndex" : 0,
+      "label" : "Ignore Task Assignable Time",
+      "id" : "checkbox1",
+      "type" : "boolean"
+    }, {
+      "size" : 6,
+      "type" : ""
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-datatable" ],
+        "stencilId" : "cloud-datatable"
+      },
+      "enabled" : true,
+      "extraSettings" : {
+        "dataSource" : "Rest",
+        "queryUrl" : "{{endpoints.platform}}/search/query-tasks/query/cLACQ002ManagerQuery?rootDefinitionKey=loanC001LoanApplication&finished=false&start={{$start}}&pageSize={{$pageSize}}&{{$sort}}&reload={{assignedTaskId}}",
+        "path" : "data",
+        "queryParams" : [ {
+          "name" : "assignee",
+          "value" : "{{searchPanel.selectedWorker}}",
+          "defaultValue" : ""
+        }, {
+          "name" : "finished",
+          "value" : "false",
+          "defaultValue" : ""
+        }, {
+          "name" : "status",
+          "value" : "{{searchPanel.status}}",
+          "defaultValue" : null
+        }, {
+          "name" : "member",
+          "value" : "{{searchPanel.memberId}}",
+          "defaultValue" : null
+        }, {
+          "name" : "applicationId",
+          "value" : "{{searchPanel.applicationId}}",
+          "defaultValue" : null
+        }, {
+          "name" : "priority",
+          "value" : "{{searchPanel.priority}}",
+          "defaultValue" : null
+        }, {
+          "name" : "taskName",
+          "value" : "{{searchPanel.taskName}}",
+          "defaultValue" : null
+        }, {
+          "name" : "dueBefore",
+          "value" : "{{searchPanel.dueBefore}}",
+          "defaultValue" : null
+        }, {
+          "name" : "refresh",
+          "value" : "{{$temp.refreshHelper}}",
+          "defaultValue" : null
+        }, {
+          "name" : "ignoreTaskAssignableTime",
+          "value" : "{{ignoreTaskAssignableTime}}",
+          "defaultValue" : null
+        } ],
+        "storage" : "Full",
+        "linkTarget" : "_blank",
+        "validationPanelDisplay" : "show",
+        "selectable" : "Single",
+        "output" : {
+          "numRows" : "{{$temp.numRows1}}"
+        },
+        "infiniteScroll" : false,
+        "showPagination" : true,
+        "autoHidePagination" : false,
+        "clientPagination" : false,
+        "showTotalRecords" : true,
+        "pageSize" : 10,
+        "pageSizeOptions" : [ 10, 20, 50 ],
+        "columns" : [ {
+          "label" : "Application Number",
+          "id" : "applicationId",
+          "accessor" : "rootScopeBusinessKey",
+          "alignment" : "center",
+          "component" : {
+            "type" : "link",
+            "value" : "{{$item.rootScopeBusinessKey ? $item.rootScopeBusinessKey : $item._original.rootScopeBusinessKey}}",
+            "extraSettings" : {
+              "validationPanelDisplay" : "show",
+              "target" : "_blank",
+              "url" : "{{endpoints.cloe_app_uw}}{{$item.rootScopeBusinessKey ? $item.rootScopeBusinessKey : $item._original.rootScopeBusinessKey}}"
+            },
+            "textAlign" : "center",
+            "labelAlign" : "center"
+          },
+          "filterable" : "false",
+          "maxWidth" : 40,
+          "minWidth" : 25,
+          "width" : 25,
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Member Name",
+          "id" : "memberName",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span>{{$item.root.primaryApplicant.firstName}} {{$item.root.primaryApplicant.lastName}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Member ID",
+          "id" : "member",
+          "accessor" : "root.memberUsaaNumber",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span><a href='{{endpoints.conversant}}{{$item.root.primaryApplicant.memberGuid}}' target='_blank'>{{$item.root.primaryApplicant.usaaNumber}}</a></span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Task Name",
+          "id" : "name",
+          "accessor" : "name",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span style='white-space:normal'><a href='./#/{{$route.currentAppId}}/{{$route.currentPageId}}/task/{{$item.id}}' target='_blank'>{{$item.name}}</a></span>"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Claimed",
+          "id" : "claimTime",
+          "accessor" : "claimTime",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{flw.formatDate($item.claimTime, 'MM/DD/YYYY HH:mm')}}"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Task Deadline",
+          "id" : "dueDate",
+          "accessor" : "dueDate",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span>{{flw.formatDate($item.dueDate, 'MM/DD/YYYY HH:mm')}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Impact",
+          "id" : "priority",
+          "accessor" : "priority",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{$item.priority}}"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Assignee",
+          "id" : "assignee",
+          "accessor" : "assignee",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span title='{{flw.getUser($item.assignee).displayName}}'>{{($item.assignee).slice(0,7)}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Pend Status",
+          "id" : "pendStatus",
+          "accessor" : "pendingStatus",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{$item.pendingStatus}}"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : "{{$payload.tasksFilter != \"unassigned\"}}"
+        }, {
+          "label" : "Completed",
+          "id" : "endTime",
+          "accessor" : "endTime",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{flw.formatDate($item.endTime, 'MM/DD/YYYY HH:mm')}}"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Loan Status",
+          "id" : "loanStatus",
+          "accessor" : "root.loanStatus",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{($item.root.loanStatus).replaceAll('_', ' ')}}"
+          },
+          "filterable" : "false",
+          "width" : 150,
+          "sortable" : "true",
+          "show" : true
+        } ],
+        "sortableColumns" : true,
+        "showExportButton" : true,
+        "showFavoriteButton" : false,
+        "noDataMessage" : "No Assigned Tasks",
+        "nodataPosition" : "middle-center",
+        "response" : {
+          "total" : "total"
+        },
+        "showRefreshButton" : true,
+        "dataPollingOnInit" : false,
+        "sortable" : true,
+        "multiSort" : false,
+        "sortAsc" : "asc",
+        "sortDesc" : "desc",
+        "sortPattern" : "sortBy={{$sortItem.id}}&orderBy={{$sortItem.direction}}",
+        "filterable" : false,
+        "defaultShowFilters" : false
+      },
+      "labelAlign" : "top",
+      "value" : "{{selectedTask}}",
+      "ignore" : false,
+      "visible" : "{{selectedPanel != \"completed\"}}",
+      "isRequired" : false,
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "datatable1",
+      "type" : "dataTable"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-datatable" ],
+        "stencilId" : "cloud-datatable"
+      },
+      "enabled" : true,
+      "extraSettings" : {
+        "dataSource" : "Rest",
+        "queryUrl" : "{{endpoints.platform}}/search/query-tasks/query/cLACQ002ManagerQuery?rootDefinitionKey=loanC001LoanApplication&finished=true&start={{$start}}&pageSize={{$pageSize}}&{{$sort}}&reload={{assignedTaskId}}",
+        "path" : "data",
+        "queryParams" : [ {
+          "name" : "assignee",
+          "value" : "{{searchPanel.selectedWorker}}",
+          "defaultValue" : ""
+        }, {
+          "name" : "finished",
+          "value" : "{{selectedPanel == \"completed\"}}",
+          "defaultValue" : ""
+        }, {
+          "name" : "status",
+          "value" : "{{searchPanel.status}}",
+          "defaultValue" : null
+        }, {
+          "name" : "member",
+          "value" : "{{searchPanel.memberId}}",
+          "defaultValue" : null
+        }, {
+          "name" : "applicationId",
+          "value" : "{{searchPanel.applicationId}}",
+          "defaultValue" : null
+        }, {
+          "name" : "priority",
+          "value" : "{{searchPanel.priority}}",
+          "defaultValue" : null
+        }, {
+          "name" : "taskName",
+          "value" : "{{searchPanel.taskName}}",
+          "defaultValue" : null
+        }, {
+          "name" : "dueBefore",
+          "value" : "{{searchPanel.dueBefore}}",
+          "defaultValue" : null
+        }, {
+          "name" : "refresh",
+          "value" : "{{$temp.refreshHelper}}",
+          "defaultValue" : null
+        }, {
+          "name" : "ignoreTaskAssignableTime",
+          "value" : "{{ignoreTaskAssignableTime}}",
+          "defaultValue" : null
+        } ],
+        "storage" : "Full",
+        "linkTarget" : "_blank",
+        "validationPanelDisplay" : "show",
+        "selectable" : "Single",
+        "output" : {
+          "numRows" : "{{$temp.numRows1}}"
+        },
+        "infiniteScroll" : false,
+        "showPagination" : true,
+        "autoHidePagination" : false,
+        "clientPagination" : false,
+        "showTotalRecords" : true,
+        "pageSize" : 10,
+        "pageSizeOptions" : [ 10, 20, 50 ],
+        "columns" : [ {
+          "label" : "Application Number",
+          "id" : "applicationId",
+          "accessor" : "rootScopeBusinessKey",
+          "alignment" : "center",
+          "component" : {
+            "type" : "link",
+            "value" : "{{$item.rootScopeBusinessKey ? $item.rootScopeBusinessKey : $item._original.rootScopeBusinessKey}}",
+            "extraSettings" : {
+              "validationPanelDisplay" : "show",
+              "target" : "_blank",
+              "url" : "{{endpoints.cloe_app_uw}}{{$item.rootScopeBusinessKey ? $item.rootScopeBusinessKey : $item._original.rootScopeBusinessKey}}"
+            },
+            "textAlign" : "center",
+            "labelAlign" : "center"
+          },
+          "filterable" : "false",
+          "maxWidth" : 40,
+          "minWidth" : 25,
+          "width" : 25,
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Member Name",
+          "id" : "memberName",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span>{{$item.root.primaryApplicant.firstName}} {{$item.root.primaryApplicant.lastName}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Member ID",
+          "id" : "member",
+          "accessor" : "root.memberUsaaNumber",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span><a href='{{endpoints.conversant}}{{$item.root.primaryApplicant.memberGuid}}' target='_blank'>{{$item.root.primaryApplicant.usaaNumber}}</a></span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Task Name",
+          "id" : "name",
+          "accessor" : "name",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span style='white-space:normal'><a href='./#/{{$route.currentAppId}}/{{$route.currentPageId}}/task/{{$item.id}}' target='_blank'>{{$item.name}}</a></span>"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Claimed",
+          "id" : "claimTime",
+          "accessor" : "claimTime",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{flw.formatDate($item.claimTime, 'MM/DD/YYYY HH:mm')}}"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Task Deadline",
+          "id" : "dueDate",
+          "accessor" : "dueDate",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span>{{flw.formatDate($item.dueDate, 'MM/DD/YYYY HH:mm')}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Impact",
+          "id" : "priority",
+          "accessor" : "priority",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{$item.priority}}"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Assignee",
+          "id" : "assignee",
+          "accessor" : "assignee",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "<span title='{{flw.getUser($item.assignee).displayName}}'>{{($item.assignee).slice(0,7)}}</span>"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : true
+        }, {
+          "label" : "Pend Status",
+          "id" : "pendStatus",
+          "accessor" : "pendingStatus",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{$item.pendingStatus}}"
+          },
+          "filterable" : "false",
+          "sortable" : "false",
+          "show" : "{{$payload.tasksFilter != \"unassigned\"}}"
+        }, {
+          "label" : "Completed",
+          "id" : "endTime",
+          "accessor" : "endTime",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{flw.formatDate($item.endTime, 'MM/DD/YYYY HH:mm')}}"
+          },
+          "filterable" : "false",
+          "sortable" : "true",
+          "show" : true
+        }, {
+          "label" : "Loan Status",
+          "id" : "loanStatus",
+          "accessor" : "root.loanStatus",
+          "alignment" : "center",
+          "component" : {
+            "type" : "htmlComponent",
+            "value" : "{{($item.root.loanStatus).replaceAll('_', ' ')}}"
+          },
+          "filterable" : "false",
+          "width" : 150,
+          "sortable" : "true",
+          "show" : true
+        } ],
+        "sortableColumns" : true,
+        "showExportButton" : true,
+        "showFavoriteButton" : false,
+        "noDataMessage" : "No Assigned Tasks",
+        "nodataPosition" : "middle-center",
+        "response" : {
+          "total" : "total"
+        },
+        "showRefreshButton" : true,
+        "dataPollingOnInit" : false,
+        "sortable" : true,
+        "multiSort" : false,
+        "sortAsc" : "asc",
+        "sortDesc" : "desc",
+        "sortPattern" : "sortBy={{$sortItem.id}}&orderBy={{$sortItem.direction}}",
+        "filterable" : false,
+        "defaultShowFilters" : false
+      },
+      "labelAlign" : "top",
+      "value" : "{{selectedTask}}",
+      "ignore" : false,
+      "visible" : "{{selectedPanel != \"open\"}}",
+      "isRequired" : false,
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "datatable2",
+      "type" : "dataTable"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-rest-button" ],
+        "stencilId" : "cloud-rest-button"
+      },
+      "label" : "Get memberGroups for assigneeList",
+      "extraSettings" : {
+        "alignment" : "left",
+        "iconAlignment" : "right",
+        "validationPanelDisplay" : "show",
+        "method" : "get",
+        "url" : "{{endpoints.idm}}/current-user",
+        "path" : "memberGroups",
+        "showFullResponse" : false,
+        "handleErrorResponse" : false,
+        "autoExecute" : true,
+        "executeAlways" : true,
+        "showLoading" : true
+      },
+      "primary" : false,
+      "labelAlign" : "top",
+      "value" : "{{memberGroups}}",
+      "ignore" : false,
+      "visible" : false,
+      "enabled" : true,
+      "isRequired" : false,
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "rest-button2",
+      "type" : "restButton"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-rest-button" ],
+        "stencilId" : "cloud-rest-button"
+      },
+      "label" : "Get assigneeList from memberGroups",
+      "extraSettings" : {
+        "alignment" : "left",
+        "iconAlignment" : "right",
+        "validationPanelDisplay" : "show",
+        "method" : "post",
+        "url" : "{{endpoints.idm}}/query/users",
+        "path" : "data",
+        "sendPayloadMapping" : [ {
+          "name" : "memberOfGroups",
+          "expression" : "{{memberGroups}}"
+        }, {
+          "name" : "sort",
+          "expression" : "displayName"
+        }, {
+          "name" : "order",
+          "expression" : "asc"
+        }, {
+          "name" : "displayNameLikeIgnoreCase",
+          "expression" : "{{}}"
+        }, {
+          "name" : "size",
+          "expression" : "500"
+        } ],
+        "showFullResponse" : true,
+        "handleErrorResponse" : false,
+        "autoExecute" : true,
+        "executeAlways" : false,
+        "showLoading" : true
+      },
+      "primary" : false,
+      "labelAlign" : "top",
+      "value" : "{{$temp.assigneeList}}",
+      "ignore" : false,
+      "visible" : false,
+      "enabled" : true,
+      "isRequired" : false,
+      "size" : 12,
+      "tabIndex" : 0,
+      "id" : "rest-button3",
+      "type" : "restButton"
+    } ]
+  }, {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-script-button" ],
+        "stencilId" : "cloud-script-button"
+      },
+      "isRequired" : false,
+      "extraSettings" : {
+        "text" : "Set Assignee",
+        "script" : "{{searchPanel.selectedWorker == null?\"foo\":searchPanel.selectedWorker.workerId}}",
+        "autoExecute" : "{{searchPanel.selectedWorker}}",
+        "executeAlways" : false,
+        "alignment" : "left",
+        "iconAlignment" : "right",
+        "validationPanelDisplay" : "show"
+      },
+      "value" : "{{searchPanel.assignee}}",
+      "visible" : false,
+      "ignore" : false,
+      "primary" : false,
+      "labelAlign" : "top",
+      "enabled" : true,
+      "size" : 6,
+      "tabIndex" : 0,
+      "id" : "script-button2",
+      "type" : "scriptButton"
+    }, {
+      "designInfo" : {
+        "stencilSuperIds" : [ "Component" ],
+        "stencilId" : "work-action"
+      },
+      "extraSettings" : {
+        "text" : "Call HR API to start search for direct reports - Original Button",
+        "script" : "{{example + 1}}",
+        "autoExecute" : true,
+        "executeAlways" : false,
+        "alignment" : "left",
+        "iconAlignment" : "right",
+        "validationPanelDisplay" : "show",
+        "actionDefinitionKey" : "cLACA002RequestManagerReports",
+        "sendFullPayload" : false,
+        "sendFullScope" : false,
+        "mapFullResponse" : false,
+        "mapResponseInsideScope" : false,
+        "responsePayloadMapping" : [ {
+          "name" : "$temp.workersList",
+          "expression" : "{{$response.executionPayload.myReports}}"
+        } ],
+        "sendScopeIdToGetDefinition" : true
+      },
+      "value" : ".",
+      "visible" : false,
+      "ignore" : false,
+      "primary" : false,
+      "labelAlign" : "top",
+      "enabled" : "{{flw.notExists($temp.workersList) == false}}",
+      "size" : 6,
+      "id" : "work-action5",
+      "type" : "workAction"
+    } ]
+  } ],
+  "metadata" : {
+    "key" : "cLACPA002TaskListManager",
+    "name" : "CLAC-PA-002 Task List (Manager)",
+    "description" : null,
+    "version" : "1",
+    "modelType" : "page",
+    "flowableDesignVersion" : 3110,
+    "palette" : "flowable-work-page-palette"
+  }
+}

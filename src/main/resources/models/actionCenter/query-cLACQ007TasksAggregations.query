@@ -1,0 +1,35 @@
+{
+  "configuration" : {
+    "sortingDefinition" : {
+      "defaultSortOrder" : "desc",
+      "defaultSortField" : "assignee"
+    },
+    "paginationDefinition" : {
+      "enable" : false
+    },
+    "isSafeQuery" : true,
+    "filterDefinition" : {
+      "logicalOperator" : "and",
+      "members" : [ {
+        "inputParameter" : "startTime"
+      } ],
+      "inputParameters" : [ {
+        "name" : "startTime",
+        "label" : "Start Time",
+        "type" : "startTime",
+        "required" : false
+      } ]
+    },
+    "responseDefinition" : {
+      "fields" : [ "assignee", "startTime", "rootScopeBusinessKey", "dueDate" ],
+      "returnResults" : true,
+      "variables" : [ ]
+    },
+    "aggregationDefinitions" : [ ]
+  },
+  "sourceIndex" : "tasks",
+  "subType" : "query-builder",
+  "type" : "standard",
+  "name" : "CLAC-Q-007 Tasks Aggregations ",
+  "key" : "cLACQ007TasksAggregations"
+}

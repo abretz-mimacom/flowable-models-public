@@ -1,0 +1,49 @@
+{
+  "parameters" : {
+    "assignee" : {
+      "type" : "string"
+    },
+    "rootDefinitionKey" : {
+      "type" : "string"
+    },
+    "finished" : {
+      "type" : "string"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "startedAfter" : {
+      "type" : "localDate"
+    },
+    "member" : {
+      "type" : "string"
+    },
+    "applicationId" : {
+      "type" : "string"
+    },
+    "priority" : {
+      "type" : "integer"
+    },
+    "taskName" : {
+      "type" : "string"
+    },
+    "dueBefore" : {
+      "type" : "localDate"
+    },
+    "sortBy" : {
+      "type" : "string"
+    },
+    "orderBy" : {
+      "type" : "string"
+    },
+    "ignoreTaskAssignableTime" : {
+      "type" : "string"
+    }
+  },
+  "templateContent" : "<#ftl output_format=\"JSON\"> \n  <#setting number_format=\"0\"> \n{\n  <#if pageSize??>\n  \"size\": ${pageSize},\n  </#if>\n  <#if start??>\n  \"from\": ${start},\n  </#if>\n  \"query\": {\n    \"bool\": {\n      \"should\": [\n        { \"term\": { \"rootScopeDefinitionKey\": \"loanC001LoanApplication\"}}, <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n        { \"term\": { \"rootScopeDefinitionKey\": \"raiP005OutboundCallStrategy_\"}}, <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n        { \"term\": { \"rootScopeDefinitionKey\": \"rAI1\"}}, <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n\t\t{ \"term\": { \"rootScopeDefinitionKey\": \"nafP002NafMain\"}}, <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n\t\t{ \"term\": { \"rootScopeDefinitionKey\": \"rAIP001DocumentsReview\"}} <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n      ],\n\t  \"minimum_should_match\": 1,\n      \"must\": [\n        { \"wildcard\": { \"rootScopeType\": \"*\" } } <#-- TEMPORARY WORKAROUND FOR rootScope bug -->\n\t\t<#if ignoreTaskAssignableTime == \"false\">\n\t\t,\n\t\t{\n\t\t\t\"bool\": {\n\t\t\t\t\"should\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"bool\": {\n\t\t\t\t\t\t\t\"must_not\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"nested\": {\n\t\t\t\t\t\t\t\t\t\t\"path\": \"variables\",\n\t\t\t\t\t\t\t\t\t\t\"query\": {\n\t\t\t\t\t\t\t\t\t\t\t\"bool\": {\n\t\t\t\t\t\t\t\t\t\t\t\t\"filter\": [\n\t\t\t\t\t\t\t\t\t\t\t\t\t{ \"term\": { \"variables.name\": \"taskAssignableTime\" } }\n\t\t\t\t\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"nested\": {\n\t\t\t\t\t\t\t\"path\": \"variables\",\n\t\t\t\t\t\t\t\"query\": {\n\t\t\t\t\t\t\t\t\"bool\": {\n\t\t\t\t\t\t\t\t\t\"filter\": [\n\t\t\t\t\t\t\t\t\t\t{ \"term\": { \"variables.name\": \"taskAssignableTime\" } },\n\t\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\t\"range\": {\n\t\t\t\t\t\t\t\t\t\t\t\t\"variables.dateValue\": {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\"lte\": \"now\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\"format\": \"yyyy-MM-dd'T'HH:mm:ss.SSS\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\"time_zone\": \"UTC\"\n\t\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"minimum_should_match\": 1\n\t\t\t}\n\t\t}\n\t\t</#if>\n        <#if assignee?? && assignee = \"none\">\n        ,\n        {\n           \"nested\": {\n               \"path\": \"identityLinks\",\n               \"query\": {\n                   \"bool\": {\n                       \"must\": [\n                           {\n                               \"term\": {\n                                   \"identityLinks.type\": \"assignee\"\n                               }\n                           },\n                           {\n                               \"term\": {\n                                   \"identityLinks.userId\": \"${assignee}.split('@')[0]\"\n                               }\n                           }\n                       ]\n                   }\n               }\n           }\n        }\n        </#if>\n        <#if finished?? && finished == \"true\">\n        , \n        {\n              \"exists\": {\"field\": \"endTime\"}\n        }\n        </#if>\n        <#if startedAfter??>\n        ,\n        {\n          \"range\": {\n            \"createTime\": {\n               \"gte\": \"${startedAfter}\"   \n            }\n          }\n        }\n        </#if>\n        <#if dueBefore??>\n        ,\n        {\n          \"range\": {\n            \"dueDate\": {\n               \"lte\": \"${dueBefore}\"   \n            }\n          }\n        }\n        </#if>\n        <#if status??>\n        , \n        {\n          \"nested\": {\n            \"path\": \"variables\",\n            \"query\": {\n              \"bool\": {\n                \"must\": [\n                  { \"term\": { \"variables.name\": \"loanStatus\" } },\n                  { \"match_phrase\": { \"variables.textValue\": \"${status}\" } }\n                ]\n              }\n            }\n          }\n        }\n        </#if>\n        <#if member??>\n        , \n        {\n          \"nested\": {\n            \"path\": \"variables\",\n            \"query\": {\n              \"bool\": {\n                \"must\": [\n                  { \"term\": { \"variables.name\": \"memberUsaaNumber\" } },\n                  { \"match\": { \"variables.textValueKeyword\": \"${member}\" } }\n                ]\n              }\n            }\n          }\n        }\n        </#if>\n        <#if applicationId??>\n        , \n        {\n          \"nested\": {\n            \"path\": \"variables\",\n            \"query\": {\n              \"bool\": {\n                \"must\": [\n                  { \"term\": { \"variables.name\": \"applicationId\" } },\n                  { \"match\": { \"variables.textValueKeyword\": \"${applicationId}\" } }\n                ]\n              }\n            }\n          }\n        }\n        </#if>\n        <#if priority??>\n        , \n        { \"term\": { \"priority\": \"${priority}\" } }\n        </#if>\n        <#if taskName??>\n        , \n        { \"match_phrase\": { \"name\": \"${taskName}\" } }\n        </#if>\n      ]\n  \n      <#if (assignee?? && assignee == \"none\") || (finished?? && finished == \"false\")>\n      ,\n      \"must_not\": [\n          <#if assignee?? && assignee == \"none\">\n            {\n              \"nested\": {\n                  \"path\": \"identityLinks\",\n                  \"query\": {\n                      \"bool\": {\n                          \"must\": [\n                              {\n                                  \"term\": {\n                                      \"identityLinks.type\": \"assignee\"\n                                  }\n                              }\n                          ]\n                      }\n                  }\n              }\n          }\n          </#if>\n          <#if (assignee?? && assignee == \"none\") && (finished?? && finished == \"false\")>\n          ,\n          </#if>\n          <#if finished?? && finished == \"false\">\n          {\n              \"exists\": {\"field\": \"endTime\"}\n          }\n          </#if>\n        ]\n      </#if>\n      <#if !currentGroups?seq_contains(\"flowableAdministrator\")> \n      ,\n      \"filter\": {\n        \"bool\": {\n          \"should\": [\n              {\n                \"term\": {\n                    \"involvedUsers\": \"${currentUserId}\"\n                }\n              }\n              <#if (!assignee?? || (assignee?? && assignee == \"none\"))>\n              ,\n              {\n                \"terms\": {\n                   \"candidateGroups\": [\n                       <#list currentGroups as candidateGroup>\n                       \"${candidateGroup}\"<#sep>,</#sep>\n                      </#list>\n                   ]\n                }\n             }\n             </#if>\n          ],\n          \"minimum_should_match\": 1\n          }\n        }\n      </#if>\n    }\n  }\n  <#assign textFields = [\"loanStatus\",\"applicationId\"]>\n  <#assign numberFields = []>\n  <#assign dateFields = []>\n  <#assign validSortFields = [\"dueDate\", \"priority\", \"name\"] + textFields + numberFields + dateFields>\n  <#if sortBy?has_content && orderBy?has_content && validSortFields?seq_contains(sortBy)>\n  , \n  \"sort\" : [\n  <#if sortBy == \"dueDate\">\n      {\n        \"dueDate\": {\n            \"order\" : \"${orderBy}\"\n        }\n      }\n  \n  <#elseif sortBy == \"priority\">\n      {\n        \"priority\": {\n            \"order\" : \"${orderBy}\"\n        }\n      }\n  <#elseif sortBy == \"name\">\n      {\n        \"nameKeyword\": {\n            \"order\" : \"${orderBy}\"\n        }\n      }\n  <#else>\n\n      {\n    <#if textFields?seq_contains(sortBy)>\n          \"variables.textValueKeyword\" : {\n    <#elseif numberFields?seq_contains(sortBy)>\n          \"variables.numberValue\" : {\n    <#elseif dateFields?seq_contains(sortBy)>\n          \"variables.dateValue\" : {\n    </#if>\n              \"order\" : \"${orderBy}\",\n              \"nested\": {\n                  \"path\": \"variables\",\n                  \"filter\": \n                    {\n                      \"term\" : { \"variables.name\" : \"${sortBy}\" }\n                    } \n              }\n          }\n      }\n  </#if>\n    ]\n  </#if>\n\n}\n\n",
+  "sourceIndex" : "tasks",
+  "subType" : "custom-query",
+  "type" : "template-query",
+  "name" : "CLAC-Q-002 ManagerQuery",
+  "key" : "cLACQ002ManagerQuery"
+}

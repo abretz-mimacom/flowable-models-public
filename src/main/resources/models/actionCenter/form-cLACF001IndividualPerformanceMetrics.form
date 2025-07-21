@@ -1,0 +1,71 @@
+{
+  "rows" : [ {
+    "cols" : [ {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-output" ],
+        "stencilId" : "cloud-output"
+      },
+      "label" : "Finished Today",
+      "labelAlign" : "top",
+      "value" : "<p>{{total_count.value}}</p>",
+      "defaultValue" : false,
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 4,
+      "id" : "output1",
+      "type" : "htmlComponent"
+    }, {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-output" ],
+        "stencilId" : "cloud-output"
+      },
+      "label" : "Average Handle Time (min)",
+      "labelAlign" : "top",
+      "value" : "<p>{{filtered_nested.filtered_by_name.avg_number_value.value > 0 ?filtered_nested.filtered_by_name.avg_number_value.value / 60 : \"N/A\"}}</p>",
+      "defaultValue" : false,
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 4,
+      "id" : "output2",
+      "type" : "htmlComponent"
+    }, {
+      "designInfo" : {
+        "stencilSuperIds" : [ "base-output" ],
+        "stencilId" : "cloud-output"
+      },
+      "label" : "SLO Adherence %:",
+      "labelAlign" : "top",
+      "value" : "<p>{{(early_completion_count.doc_count > 0 ) ? flw.round(((early_completion_count.doc_count / total_count.value) * 100), 2) : \"N/A\"}}</p>",
+      "defaultValue" : false,
+      "ignore" : false,
+      "visible" : true,
+      "enabled" : true,
+      "isRequired" : false,
+      "extraSettings" : {
+        "validationPanelDisplay" : "show"
+      },
+      "size" : 4,
+      "id" : "output3",
+      "type" : "htmlComponent"
+    } ]
+  } ],
+  "metadata" : {
+    "key" : "cLACF001IndividualPerformanceMetrics",
+    "name" : "CLAC-F-001 Individual Performance Metrics",
+    "description" : null,
+    "version" : "1",
+    "modelType" : "form",
+    "flowableDesignVersion" : 3110,
+    "palette" : "flowable-work-form-palette"
+  }
+}

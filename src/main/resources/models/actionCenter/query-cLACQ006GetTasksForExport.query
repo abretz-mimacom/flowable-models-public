@@ -1,0 +1,81 @@
+{
+  "configuration" : {
+    "sortingDefinition" : {
+      "defaultSortOrder" : "desc",
+      "defaultSortField" : "dueDate"
+    },
+    "paginationDefinition" : {
+      "enable" : false
+    },
+    "isSafeQuery" : false,
+    "filterDefinition" : {
+      "logicalOperator" : "and",
+      "members" : [ {
+        "inputParameter" : "variables"
+      }, {
+        "inputParameter" : "caseDefinitions"
+      }, {
+        "inputParameter" : "processDefinitions"
+      }, {
+        "inputParameter" : "startTime"
+      }, {
+        "inputParameter" : "endTime"
+      }, {
+        "inputParameter" : "caseDefinitions"
+      }, {
+        "inputParameter" : "finished"
+      } ],
+      "inputParameters" : [ {
+        "name" : "variables",
+        "label" : "Variables",
+        "type" : "variables",
+        "required" : false
+      }, {
+        "name" : "caseDefinitions",
+        "label" : "Case Definitions",
+        "type" : "caseDefinitions",
+        "required" : false
+      }, {
+        "name" : "processDefinitions",
+        "label" : "Process Definitions",
+        "type" : "processDefinitions",
+        "required" : false
+      }, {
+        "name" : "startTime",
+        "label" : "Start TIme",
+        "type" : "startTime",
+        "required" : false
+      }, {
+        "name" : "endTime",
+        "label" : "End Time",
+        "type" : "endTime",
+        "required" : false
+      }, {
+        "name" : "finished",
+        "label" : "Finished",
+        "type" : "finished",
+        "required" : false
+      } ]
+    },
+    "responseDefinition" : {
+      "fields" : [ ],
+      "returnResults" : true,
+      "variables" : [ {
+        "name" : "root.memberUsaaNumber",
+        "type" : "string"
+      }, {
+        "name" : "root.loanPurpose",
+        "type" : "string"
+      } ]
+    },
+    "aggregationDefinitions" : [ {
+      "name" : "Total",
+      "type" : "countId"
+    } ]
+  },
+  "sourceIndex" : "tasks",
+  "subType" : "query-builder",
+  "type" : "standard",
+  "name" : "CLAC-Q-006 Get Tasks for Export",
+  "key" : "cLACQ006GetTasksForExport"
+}

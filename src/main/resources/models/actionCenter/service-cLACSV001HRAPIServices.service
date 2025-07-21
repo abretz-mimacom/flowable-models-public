@@ -1,0 +1,130 @@
+{
+  "type" : "REST",
+  "operations" : [ {
+    "name" : "Get HR Worker Data",
+    "key" : "getHRWorkerData",
+    "inputParameters" : [ {
+      "displayName" : "Worker ID",
+      "name" : "workerId",
+      "type" : "string",
+      "required" : true
+    } ],
+    "outputParameters" : [ ],
+    "config" : {
+      "url" : "/v3/corporate/hr/human-capital-management/core/workers/${workerId}",
+      "method" : "GET"
+    },
+    "type" : "search"
+  }, {
+    "name" : "Send Request for Users by Cost Center",
+    "key" : "sendRequestForUsersByCostCenter",
+    "inputParameters" : [ {
+      "displayName" : "Cost Center ID",
+      "name" : "costCenter",
+      "type" : "string"
+    } ],
+    "outputParameters" : [ {
+      "displayName" : "Status",
+      "name" : "status",
+      "type" : "string",
+      "applyMappingConfig" : "onSuccess",
+      "missingValueConfig" : "ignore",
+      "nullValueConfig" : "setToNull"
+    }, {
+      "displayName" : "Location",
+      "name" : "location",
+      "type" : "string",
+      "applyMappingConfig" : "onSuccess",
+      "missingValueConfig" : "ignore",
+      "nullValueConfig" : "setToNull"
+    }, {
+      "displayName" : "Valet Key",
+      "name" : "valetKey",
+      "type" : "string",
+      "applyMappingConfig" : "onSuccess",
+      "missingValueConfig" : "ignore",
+      "nullValueConfig" : "setToNull"
+    } ],
+    "config" : {
+      "url" : "/v3/corporate/hr/human-capital-management/bulk-data/hr-search",
+      "method" : "POST",
+      "bodyTemplateResource" : "classpath:templates/bulk_search_workers.ftl"
+    },
+    "type" : "search"
+  }, {
+    "name" : "Check Request Status",
+    "key" : "checkRequestStatus",
+    "inputParameters" : [ {
+      "displayName" : "Status Location",
+      "name" : "statusLocation",
+      "type" : "string"
+    } ],
+    "outputParameters" : [ {
+      "displayName" : "Status",
+      "name" : "status",
+      "type" : "string",
+      "applyMappingConfig" : "onSuccess",
+      "missingValueConfig" : "ignore",
+      "nullValueConfig" : "setToNull"
+    }, {
+      "displayName" : "Pages",
+      "name" : "pages",
+      "type" : "json",
+      "applyMappingConfig" : "onSuccess",
+      "missingValueConfig" : "ignore",
+      "nullValueConfig" : "setToNull"
+    } ],
+    "config" : {
+      "url" : "${flwStringUtils.substringFrom(statusLocation,1)}",
+      "method" : "GET"
+    },
+    "type" : "lookup"
+  }, {
+    "name" : "Get Workers Page",
+    "key" : "getWorkersPage",
+    "inputParameters" : [ {
+      "displayName" : "Page",
+      "name" : "page",
+      "type" : "string"
+    } ],
+    "outputParameters" : [ ],
+    "config" : {
+      "url" : "${flwStringUtils.substringFrom(page,1)}",
+      "method" : "GET"
+    },
+    "type" : "search"
+  }, {
+    "name" : "Convert 5 Digit IDs to 7 digit IDs",
+    "key" : "convert5DigitIDsTo7DigitIDs",
+    "inputParameters" : [ {
+      "displayName" : "Search Users",
+      "name" : "searchUsers",
+      "type" : "json"
+    } ],
+    "outputParameters" : [ ],
+    "config" : {
+      "url" : "/v1/digital-workplace/utilities/ad-tools/users",
+      "method" : "POST"
+    },
+    "type" : "search"
+  } ],
+  "config" : {
+    "baseUrl" : "https://rintapi-workplace.usaa.com",
+    "httpRequestHandler" : {
+      "type" : "script",
+      "implementation" : {
+        "language" : "groovy",
+        "script" : "out.println(flwHttpRequest.getUrl());"
+      }
+    },
+    "httpResponseHandler" : {
+      "type" : "script",
+      "implementation" : {
+        "language" : "groovy",
+        "script" : "out.println(flwHttpResponse.getBody());"
+      }
+    }
+  },
+  "name" : "CLAC-SV-001 HR API Services",
+  "key" : "cLACSV001HRAPIServices"
+}

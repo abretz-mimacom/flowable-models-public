@@ -1,0 +1,110 @@
+{
+  "options" : [ {
+    "name" : "size",
+    "type" : "long"
+  }, {
+    "name" : "searchAfter",
+    "type" : "array"
+  }, {
+    "name" : "sort",
+    "type" : "sort"
+  } ],
+  "queryModel" : {
+    "key" : "cLACQ006GetTasksForExport",
+    "id" : "QUERY_MODEL-7693464e-f083-11ef-8ab5-0a580a260f71"
+  },
+  "subType" : "",
+  "type" : "table",
+  "configuration" : {
+    "pageSize" : 25,
+    "columns" : [ {
+      "key" : "id",
+      "defaultLabel" : "ID",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "nameKeyword",
+      "defaultLabel" : "Name",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "createTime",
+      "defaultLabel" : "Created",
+      "type" : "dateTime",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "endTime",
+      "defaultLabel" : "Completed",
+      "type" : "dateTime",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "dueDate",
+      "defaultLabel" : "Due date",
+      "type" : "dateTime",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "assignee",
+      "defaultLabel" : "Assignee",
+      "type" : "user",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "owner",
+      "defaultLabel" : "Owner",
+      "type" : "user",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "scopeDefinitionKey",
+      "defaultLabel" : "Definition key",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "rootScopeDefinitionKey",
+      "defaultLabel" : "Root definition key",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : true
+    }, {
+      "key" : "rootScopeName",
+      "defaultLabel" : "Root instance name",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : false
+    }, {
+      "key" : "description",
+      "defaultLabel" : "Description",
+      "type" : "string",
+      "visible" : true,
+      "sortable" : false
+    }, {
+      "key" : "priority",
+      "defaultLabel" : "Priority",
+      "type" : "integer",
+      "visible" : true,
+      "sortable" : true
+    } ],
+    "options" : [ {
+      "name" : "size",
+      "type" : "long"
+    }, {
+      "name" : "searchAfter",
+      "type" : "array"
+    }, {
+      "name" : "sort",
+      "type" : "sort"
+    } ],
+    "title" : "LOAN Tasks"
+  },
+  "queryResultMapping" : {
+    "aggregationDefinitions" : [ ]
+  },
+  "name" : "CL - LOAN Tasks",
+  "key" : "cLLOANTasks"
+}
