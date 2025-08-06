@@ -8,23 +8,23 @@
   <packaging>jar</packaging>
 
   <properties>
-    <ci.repo.url>${env.CI_API_V4_URL}/projects/${ci.project.id}/packages/maven</ci.repo.url>
     <ci.project.id>${env.CI_PROJECT_ID}</ci.project.id>
+    <ci.repo.url>${env.CI_API_V4_URL}/projects/${ci.project.id}/packages/maven</ci.repo.url>
   </properties>
 
   <repositories>
     <repository>
-      <id>gitlab-maven</id>
-      <url>ci.repo.url</url>
+      <id>git-maven</id>
+      <url>${ci.repo.url}</url>
     </repository>
   </repositories>
   <distributionManagement>
     <repository>
-      <id>gitlab-maven</id>
+      <id>git-maven</id>
       <url>${ci.repo.url}</url>
     </repository>
     <snapshotRepository>
-      <id>gitlab-maven</id>
+      <id>git-maven</id>
       <url>${ci.repo.url}</url>
     </snapshotRepository>
   </distributionManagement>
