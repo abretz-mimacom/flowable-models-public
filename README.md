@@ -1,6 +1,6 @@
 # flowable-models-repo
 
-
+This repository is 1 of 3 that is meant to serve as a "Best Practice Example" when it comes to Flowable Model versioning and release.
 
 
 ## Getting started
