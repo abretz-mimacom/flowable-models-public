@@ -65,7 +65,14 @@ jobs:
         VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         echo "artifact_id=$ARTIFACT_ID" >> $GITHUB_OUTPUT
         echo "version=$VERSION" >> $GITHUB_OUTPUT
-
+    
+    - name: Log in to Docker registry for base image
+      uses: docker/login-action@v3
+      with:
+        registry: repo.flowable.com/docker/flowable/flowable-work
+        username: ${{ secrets.DOCKER_PULL_USERNAME }}
+        password: ${{ secrets.DOCKER_PULL_PASSWORD }}
+        
     - name: Build Docker image
       run: |
         docker build \
