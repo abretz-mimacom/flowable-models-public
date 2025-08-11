@@ -6,27 +6,36 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '**.md'
+    # Only run if the commit message does NOT contain [skip ci]
+    # This requires a condition in jobs (see below)
   release:
     types: [created]
 
 jobs:
   bump-version:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2 # so we can diff with previous commit
-
       - name: Set up Git
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+          
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
+      - name: Pull latest bumped commit
+        run: |
+          git fetch origin master
+          git reset --hard origin/master
+          
       - name: Install xmlstarlet
         run: sudo apt-get update && sudo apt-get install -y xmlstarlet
 
