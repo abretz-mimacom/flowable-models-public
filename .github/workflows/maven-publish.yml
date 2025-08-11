@@ -10,8 +10,65 @@ on:
     types: [created]
 
 jobs:
-  build:
+  bump-version:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # so we can diff with previous commit
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Install xmlstarlet
+        run: sudo apt-get update && sudo apt-get install -y xmlstarlet
+
+      - name: Get current and previous versions
+        id: get_versions
+        run: |
+          CURRENT_VERSION=$(xmlstarlet sel -t -v "/*[local-name()='project']/*[local-name()='version']" pom.xml)
+          PREV_VERSION=$(git show HEAD~1:pom.xml | xmlstarlet sel -t -v "/*[local-name()='project']/*[local-name()='version']")
+          echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "prev=$PREV_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if major version changed
+        id: check_major
+        run: |
+          CUR_MAJOR=$(echo "${{ steps.get_versions.outputs.current }}" | cut -d. -f1)
+          PREV_MAJOR=$(echo "${{ steps.get_versions.outputs.prev }}" | cut -d. -f1)
+          if [ "$CUR_MAJOR" = "$PREV_MAJOR" ]; then
+            echo "bump_minor=true" >> $GITHUB_OUTPUT
+          else
+            echo "bump_minor=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump minor version
+        if: steps.check_major.outputs.bump_minor == 'true'
+        run: |
+          CUR_VERSION="${{ steps.get_versions.outputs.current }}"
+          MAJOR=$(echo "$CUR_VERSION" | cut -d. -f1)
+          MINOR=$(echo "$CUR_VERSION" | cut -d. -f2)
+          NEW_MINOR=$((MINOR + 1))
+          NEW_VERSION="${MAJOR}.${NEW_MINOR}.0"
+          xmlstarlet ed --inplace -u "/*[local-name()='project']/*[local-name()='version']" -v "$NEW_VERSION" pom.xml
+          echo "Bumped version: $CUR_VERSION -> $NEW_VERSION"
+
+      - name: Commit and push updated pom.xml
+        if: steps.check_major.outputs.bump_minor == 'true'
+        run: |
+          git add pom.xml
+          git commit -m "chore: bump minor version in pom.xml [skip ci]"
+          git push
+          
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
