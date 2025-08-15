@@ -153,3 +153,38 @@ jobs:
 
     - name: Push Docker image (latest tag)
       run: docker push ghcr.io/${{ github.repository_owner }}/flowable-models-public:latest
+
+  deploy:
+    name: Deploy via Helm
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'release'
+    environment: production
+    steps:
+      - name: Checkout deployment chart
+        uses: actions/checkout@v4
+        with:
+          repository: abretz-mimacom/flowable-ez-install
+          path: flowable-ez-install
+
+      - name: Set up Kubeconfig
+        # Make sure to store your kubeconfig as a secret (KUBECONFIG_DATA)
+        run: |
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > $HOME/.kube/config
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.13.3
+
+      - name: Deploy with Helm
+        env:
+          IMAGE_REPO: ghcr.io/${{ github.repository_owner }}/flowable-models-public
+          IMAGE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          helm upgrade --install flowable \
+            ./flowable-ez-install/helm/flowable-ez-install \
+            --namespace flowable \
+            --create-namespace \
+            --set flowable.work.image.repository=$IMAGE_REPO \
+            --set flowable.work.image.tag=$IMAGE_TAG
