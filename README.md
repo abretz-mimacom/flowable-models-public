@@ -1,6 +1,7 @@
 # flowable-models-repo
 
-This repository is 1 of 3 that is meant to serve as a "Best Practice Example" when it comes to Flowable Model versioning and release.
+This repository is 1 of 3 that is meant to serve as a "Best Practice Example" when it comes to Flowable DevOps. Below is the architecture and prescribed Git Branching stratgey for the 3 repositories:
+![Pipeline Diagram](assets/Pipeline.drawio.svg)
 
 
 ## Getting started
