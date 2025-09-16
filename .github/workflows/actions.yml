@@ -69,7 +69,7 @@ jobs:
         run: |
           git add pom.xml
           git commit -m "chore: bump minor version in pom.xml [skip ci]"
-          git push
+          git push origin HEAD:master
           
   build:
     runs-on: ubuntu-latest
