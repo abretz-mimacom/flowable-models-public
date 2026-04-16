@@ -141,20 +141,21 @@ jobs:
         registry: repo.flowable.com/docker/flowable/flowable-work
         username: ${{ secrets.FLOWABLE_REPO_USER }}
         password: ${{ secrets.FLOWABLE_REPO_PASSWORD }}
-    - name: get-commit-hash  
+    - name: Get Commit Hash
+      id: get-commit-hash
       run: |
         commit_hash=$(echo ${{github.sha}} | cut -c1-7)
-        echo "::set-output name=commit_hash::$commit_hash"        
+        echo "commit_hash=$commit_hash" >> $GITHUB_OUTPUT          
     - name: Build Docker image
       run: |
         docker build \
-          --build-arg JAR_FILE=target/${{ steps.artifact.outputs.artifact_id }}-${{ steps.artifact.outputs.version }}.jar \
-          -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ steps.artifact.outputs.version }}-${{ steps.get-commit-hash.output.commit_hash }} \
+          --build-arg JAR_FILE=target/${{ steps.artifact.outputs.artifact_id }}-${{ github.event.release.tag_name }}.jar \
+          -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.event.release.tag_name }}-${{ steps.get-commit-hash.outputs.commit_hash }} \
           -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest \
           .
 
     - name: Push Docker image (version tag)
-      run: docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ steps.artifact.outputs.version }}
+      run: docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.event.release.tag_name }}-${{ steps.get-commit-hash.outputs.commit_hash }}
 
     - name: Push Docker image (latest tag)
       run: docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
@@ -171,7 +172,12 @@ jobs:
         with:
           repository: ${{ github.repository_owner }}/flowable-deploy-template
           path: flowable-deploy-template
-      
+          token: ${{ secrets.ARC_TOKEN }}
+      - name: Get Commit Hash
+        id: get-commit-hash
+        run: |
+          commit_hash=$(echo ${{github.sha}} | cut -c1-7)
+          echo "commit_hash=$commit_hash" >> $GITHUB_OUTPUT       
       - name: bump values.yaml
         run: |
           # 1. Create new branch from dev
@@ -182,7 +188,7 @@ jobs:
           # 2. Update flowable.work.image.tag in all helm/*/values.yaml
           find helm -type f -name values.yaml | while read file; do
             yq e '.flowable.work.image.repository = "ghcr.io/${{ github.repository }}"' -i "$file"
-            yq e '.flowable.work.image.tag = "${{ github.event.release.tag_name }}"' -i "$file"
+            yq e '.flowable.work.image.tag = "${{ github.event.release.tag_name }}-${{ steps.get-commit-hash.outputs.commit_hash }}"' -i "$file"
           done
 
           # 3. Commit and push changes
