@@ -187,7 +187,7 @@ jobs:
 
           # 2. Update flowable.work.image.tag in all helm/*/values.yaml
           find helm -type f -name values.yaml | while read file; do
-            yq e '.flowable.work.image.repository = "ghcr.io/${{ github.repository }}"' -i "$file"
+            yq e '.flowable.work.image.repository = "ghcr.io/${{ github.repository_owner }}/${{ github.repository }}"' -i "$file"
             yq e '.flowable.work.image.tag = "${{ github.event.release.tag_name }}-${{ steps.get-commit-hash.outputs.commit_hash }}"' -i "$file"
           done
 
