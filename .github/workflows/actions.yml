@@ -149,7 +149,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker build \
-          --build-arg JAR_FILE=target/${{ steps.artifact.outputs.artifact_id }}-${{ github.event.release.tag_name }}.jar \
+          --build-arg JAR_FILE=target/${{ steps.artifact.outputs.artifact_id }}-${{ steps.artifact.outputs.version }}.jar \
           -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.event.release.tag_name }}-${{ steps.get-commit-hash.outputs.commit_hash }} \
           -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest \
           .
